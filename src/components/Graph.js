@@ -134,9 +134,25 @@ export default function App() {
         // yField: 'district',
         // xField: 'night',
         // seriesField: 'date',
+        legend: {
+            itemName: {
+                style: {
+                  fill: '#fff'
+                }
+            }
+        },
+        xAxis: {
+            label: {
+              style: {
+                  fill: '#fff'
+                },
+            }
+        },
         yAxis: {
           label: {
-            // 数值格式化为千分位
+            style: {
+                fill: '#fff'
+              },
             formatter: (v) => `${v}`.replace(/\d{1,3}(?=(\d{3})+$)/g, (s) => `${s},`),
           },
         },
