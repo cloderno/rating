@@ -155,6 +155,19 @@ export default function App() {
             trendCfg: {
               isArea: true,
             },
+            handlerStyle: {
+                radius: 10,
+                width: 20,
+                fill: '#303950'
+            },
+            trendCfg : {
+                backgroundStyle: {
+                  fill: '#3b4b65',
+                },
+                lineStyle: {
+                  fill: 'transparent'
+                }
+              }
           },
         //   annotations: [
         //     {
