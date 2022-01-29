@@ -176,10 +176,7 @@ export default function App() {
         <div className="container">
             <Line className='graph' {...config} />
 
-            {/* <input type="file" onChange={onChange} /> */}
             <button onClick={click}>click me!</button>
-
-            {/* <Line className='graph' {...config2} /> */}
         </div>
     );
 }
