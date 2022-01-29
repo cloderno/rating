@@ -1,0 +1,53 @@
+.App {
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    background: #19375A;
+}
+
+.graph {
+    flex-basis: 50%;
+    color: red;
+}
+
+.g2-tooltip {
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+.g2-tooltip-marker {
+    display: none !important;
+}
+
+.g2-tooltip-list {
+    position: relative;
+}
+
+.g2-tooltip-list-item {
+    background: red;
+    padding: 10px !important;
+    border: 2px solid #cecaca;
+    border-radius: 5px;
+}
+
+.g2-tooltip-list-item::after {
+    content:"\A";
+    border-style: solid;
+    border-width: 10px 15px 10px 0;
+    border-color: transparent #dd4397 transparent transparent;
+    position: absolute;
+    left: -15px;
+}
+
+.g2-tooltip-list-item:nth-child(1) {
+    background: green;
+}
+
+.g2-tooltip-list-item:nth-child(3) {
+    background: white;
+}
+
+
