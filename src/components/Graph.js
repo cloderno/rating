@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import * as XLSX from "xlsx";
 import { Line } from '@ant-design/plots'
 import './App.css'
-import { render } from "react-dom/cjs/react-dom.development";
 
 export default function App() {
     const [data, setData] = useState([]);
@@ -18,6 +17,8 @@ export default function App() {
 
     useEffect(() => {
         fetchExcelFile();
+        console.log(config)
+
         asyncFetch();
     }, [])
 
@@ -35,7 +36,7 @@ export default function App() {
         fetch("weather_three_days.xlsx")
             .then(res => res.arrayBuffer())
             .then(ab => {
-                const wb = XLSX.read(ab, { type: "array" })
+                const wb = XLSX.read(ab, { type: "array" });
                 const wsName = wb.SheetNames[0];
                 const ws = wb.Sheets[wsName];
                 const data = XLSX.utils.sheet_to_json(ws);
@@ -43,6 +44,9 @@ export default function App() {
                 let selectedData = selectData(data, countDate);
 
                 setExcelData(selectedData);
+            })
+            .catch(error => {
+                console.error(error);
             });
     };
 
@@ -79,15 +83,15 @@ export default function App() {
             }
         })
 
-        renameKeys(temp, "Дата", "date")
-        renameKeys(temp, "Районы", "district")
-        renameKeys(temp, "ночь,до", "night")
-        renameKeys(temp, "день,до", "day")
-        deleteKeys(temp, "ночь,от")
-        deleteKeys(temp, "день, от")
+        renameKeys(temp, "Дата", "date");
+        renameKeys(temp, "Районы", "district");
+        renameKeys(temp, "ночь,до", "night");
+        renameKeys(temp, "день,до", "day");
+        deleteKeys(temp, "ночь,от");
+        deleteKeys(temp, "день, от");
         console.log(temp);
 
-        return temp
+        return temp;
     }
 
     // меняем keys наших объектов для того чтобы можно было выбрать их в графике
@@ -108,21 +112,7 @@ export default function App() {
     }
 
     const click = () => {
-        console.log(excelData);
-        console.log(data);
-
-        // for (let i = 0; i < eachDate; i++) {
-        //     excelData.map( item => {
-        //         let arrs = Object.values(item)
-        //         //console.log(arrs.length)
-        //     }) 
-        //     let arrs = Object.values(i)
-        //     console.log(arrs)
-        // }
-        // excelData.map( item => {
-        //     let arrs = Object.values(item)
-        //     //console.log(arrs.length)
-        // }) 
+        console.log(config);
     }
 
     const config = {
@@ -197,7 +187,8 @@ export default function App() {
                 radius: 10,
                 width: 20,
                 fill: '#303950',
-                cursor: 'grabbing'
+                cursor: 'grabbing',
+                // stroke: '#204f77'
             },
             trendCfg: {
                 backgroundStyle: {
@@ -205,7 +196,7 @@ export default function App() {
                 },
                 lineStyle: {
                     fill: 'transparent'
-                }
+                },
             }
         },
         //   annotations: [
@@ -221,14 +212,14 @@ export default function App() {
         //   ],
         // 
         //colors
-        //color: ['#000000', '#ffffff', '#808080', '#c0c0c0', '#ff0000', '#008000'],
+        color: ['#000000', '#ffffff', '#808080', '#c0c0c0', '#ff0000', '#008000'],
     };
 
     return (
         <div className="container">
-            {
-                excelData.length > 0 ? <Line className='graph' {...config} /> : <h1>not yet ready</h1>
-            }
+
+                <Line className='graph' {...config} />
+
             
 
             <button onClick={click}>click me!</button>
