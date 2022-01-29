@@ -145,7 +145,7 @@ export default function App() {
             grid: {
                 line: {
                     style: {
-                        stroke: '#c0c0c0'
+                        stroke: '#2a4566'
                     }
                 }
             },
@@ -156,6 +156,13 @@ export default function App() {
             }
         },
         yAxis: {
+            grid: {
+                line: {
+                    style: {
+                        stroke: '#2a4566'
+                    }
+                }
+            },
             label: {
                 style: {
                     fill: '#fff'
