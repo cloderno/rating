@@ -109,7 +109,7 @@ export default function App() {
 
     const click = () => {
         console.log(excelData);
-        console.log(seriesField);
+        console.log(data);
 
         // for (let i = 0; i < eachDate; i++) {
         //     excelData.map( item => {
@@ -130,10 +130,15 @@ export default function App() {
         xField: 'year',
         yField: 'value',
         seriesField: 'category',
+        tooltip: {
+            fields: ['year', 'value']
+        },
         // excelData,
         // yField: 'district',
         // xField: 'night',
-        // seriesField: 'date',
+        // tooltip: {
+        //     fields: ['night', 'day']
+        // },
         legend: {
             itemName: {
                 style: {
@@ -221,7 +226,10 @@ export default function App() {
 
     return (
         <div className="container">
-            <Line className='graph' {...config} />
+            {
+                excelData.length > 0 ? <Line className='graph' {...config} /> : <h1>not yet ready</h1>
+            }
+            
 
             <button onClick={click}>click me!</button>
         </div>
