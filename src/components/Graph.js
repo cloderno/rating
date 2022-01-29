@@ -5,7 +5,7 @@ import './App.css'
 import { render } from "react-dom/cjs/react-dom.development";
 
 export default function App() {
-    //const [data, setData2] = useState([]);
+    const [data, setData] = useState([]);
     const [seriesField, setSeriesField] = useState(
         {
             "Вчера": null,
@@ -13,52 +13,22 @@ export default function App() {
             "Завтра": null,
         }
     )
-    const [excelData, setData] = useState({});
+    const [excelData, setExcelData] = useState({});
     const countDate = '2022-01-22';
-
-    // const data = [
-    //     {
-    //       year: '1991',
-    //       value: -3,
-    //     },
-    //     {
-    //       year: '1992',
-    //       value: -4,
-    //     },
-    //     {
-    //       year: '1993',
-    //       value: -3.5,
-    //     },
-    //     {
-    //       year: '1994',
-    //       value: -5,
-    //     },
-    //     {
-    //       year: '1995',
-    //       value: -4.9,
-    //     },
-    //     {
-    //       year: '1996',
-    //       value: -6,
-    //     },
-    //     {
-    //       year: '1997',
-    //       value: -7,
-    //     },
-    //     {
-    //       year: '1998',
-    //       value: -9,
-    //     },
-    //     {
-    //       year: '1999',
-    //       value: -13,
-    //     },
-    //   ];
 
     useEffect(() => {
         fetchExcelFile();
+        asyncFetch();
     }, [])
 
+    const asyncFetch = () => {
+        fetch('https://gw.alipayobjects.com/os/bmw-prod/55424a73-7cb8-4f79-b60d-3ab627ac5698.json')
+          .then((response) => response.json())
+          .then((json) => setData(json))
+          .catch((error) => {
+            console.log('fetch data failed', error);
+          });
+      };
 
     // получаем данные из ексель
     const fetchExcelFile = () => {
@@ -72,7 +42,7 @@ export default function App() {
 
             let selectedData = selectData(data, countDate);
 
-            setData(selectedData);
+            setExcelData(selectedData);
         });
     };
 
@@ -156,13 +126,20 @@ export default function App() {
     }
 
     const config = {
-        // data,
-        // yField: 'year',
-        // xField: 'value',
-        excelData,
-        yField: 'district',
-        xField: 'night',
-        seriesField: 'date',
+        data,
+        xField: 'year',
+        yField: 'value',
+        seriesField: 'category',
+        // excelData,
+        // yField: 'district',
+        // xField: 'night',
+        // seriesField: 'date',
+        yAxis: {
+          label: {
+            // 数值格式化为千分位
+            formatter: (v) => `${v}`.replace(/\d{1,3}(?=(\d{3})+$)/g, (s) => `${s},`),
+          },
+        },
         point: {
           size: 0,
           shape: 'diamond',
@@ -179,24 +156,24 @@ export default function App() {
               isArea: true,
             },
           },
-          annotations: [
-            {
-              type: 'line',
-              start: ['min', 'median'],
-              end: ['max', 'median'],
-              style: {
-                stroke: '#c0c0c0',
-                lineDash: [2, 2],
-              },
-            },
-          ],
+        //   annotations: [
+        //     {
+        //       type: 'line',
+        //       start: ['min', 'median'],
+        //       end: ['max', 'median'],
+        //       style: {
+        //         stroke: '#c0c0c0',
+        //         lineDash: [2, 2],
+        //       },
+        //     },
+        //   ],
         // legend: false,
         //colors
         //color: ['#000000', '#ffffff', '#808080', '#c0c0c0', '#ff0000', '#008000'],
       };
 
     return (
-        <div>
+        <div className="container">
             <Line className='graph' {...config} />
 
             {/* <input type="file" onChange={onChange} /> */}
