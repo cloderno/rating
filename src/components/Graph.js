@@ -142,6 +142,13 @@ export default function App() {
             }
         },
         xAxis: {
+            grid: {
+                line: {
+                    style: {
+                        stroke: '#c0c0c0'
+                    }
+                }
+            },
             label: {
                 style: {
                     fill: '#fff'
@@ -149,13 +156,6 @@ export default function App() {
             }
         },
         yAxis: {
-            grid: {
-                line: {
-                    style: {
-                        fill: 'red'
-                    }
-                }
-            },
             label: {
                 style: {
                     fill: '#fff'
