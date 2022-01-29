@@ -10,7 +10,7 @@
 }
 
 .container {
-    height: 50%;
+    height: 65%;
     width: 60%;
 }
 
@@ -33,7 +33,8 @@
 }
 
 .g2-tooltip-list-item {
-    background: red;
+    color: white;
+    font-size: 16px;
     padding: 10px !important;
     border: 2px solid #cecaca;
     border-radius: 5px;
@@ -49,11 +50,22 @@
 }
 
 .g2-tooltip-list-item:nth-child(1) {
-    background: green;
+    background: #008000;
+}
+
+.g2-tooltip-list-item:nth-child(2) {
+    background: #808080;
 }
 
 .g2-tooltip-list-item:nth-child(3) {
-    background: white;
+    background: #ff0000;
 }
 
+.g2-tooltip-list-item:nth-child(4) {
+    background: #c0c0c0;
+}
+
+.g2-tooltip-list-item:nth-child(5) {
+    background: #000000;
+}
 
