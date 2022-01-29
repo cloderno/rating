@@ -152,13 +152,17 @@ export default function App() {
         slider: {
             start: 0.1,
             end: 0.9,
+            textStyle: {
+                opacity:0
+            },
             trendCfg: {
               isArea: true,
             },
             handlerStyle: {
                 radius: 10,
                 width: 20,
-                fill: '#303950'
+                fill: '#303950',
+                cursor: 'grabbing'
             },
             trendCfg : {
                 backgroundStyle: {
