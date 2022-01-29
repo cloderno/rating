@@ -23,27 +23,27 @@ export default function App() {
 
     const asyncFetch = () => {
         fetch('https://gw.alipayobjects.com/os/bmw-prod/55424a73-7cb8-4f79-b60d-3ab627ac5698.json')
-          .then((response) => response.json())
-          .then((json) => setData(json))
-          .catch((error) => {
-            console.log('fetch data failed', error);
-          });
-      };
+            .then((response) => response.json())
+            .then((json) => setData(json))
+            .catch((error) => {
+                console.log('fetch data failed', error);
+            });
+    };
 
     // получаем данные из ексель
     const fetchExcelFile = () => {
         fetch("weather_three_days.xlsx")
-        .then(res => res.arrayBuffer())
-        .then(ab => {
-            const wb = XLSX.read(ab, { type: "array" })
-            const wsName = wb.SheetNames[0];
-            const ws = wb.Sheets[wsName];
-            const data = XLSX.utils.sheet_to_json(ws);
+            .then(res => res.arrayBuffer())
+            .then(ab => {
+                const wb = XLSX.read(ab, { type: "array" })
+                const wsName = wb.SheetNames[0];
+                const ws = wb.Sheets[wsName];
+                const data = XLSX.utils.sheet_to_json(ws);
 
-            let selectedData = selectData(data, countDate);
+                let selectedData = selectData(data, countDate);
 
-            setExcelData(selectedData);
-        });
+                setExcelData(selectedData);
+            });
     };
 
     // конвертируем 5 значные цифры ексели в дату
@@ -66,7 +66,7 @@ export default function App() {
         let temp = [];
 
         const dates = prevAndNext(chosenDate); //выбираем нужную дату
-        setSeriesField({"Вчера": dates[0], "Завтра": dates[1], "Сегодня": dates[2] });
+        setSeriesField({ "Вчера": dates[0], "Завтра": dates[1], "Сегодня": dates[2] });
 
         data.map(i => {
             let date = dateToJs(i.Дата);
@@ -91,8 +91,8 @@ export default function App() {
     }
 
     // меняем keys наших объектов для того чтобы можно было выбрать их в графике
-    const renameKeys = (arr , oldKey, newKey) => { // function to rename on button click
-        arr = arr.map(function(arr) {
+    const renameKeys = (arr, oldKey, newKey) => { // function to rename on button click
+        arr = arr.map(function (arr) {
             arr[`${newKey}`] = arr[`${oldKey}`]; // Assign new key
             delete arr[`${oldKey}`]; // Delete old key
             return arr;
@@ -100,8 +100,8 @@ export default function App() {
     }
 
     // удаление keys
-    const deleteKeys = (arr , oldKey) => { // function to rename on button click
-        arr = arr.map(function(arr) {
+    const deleteKeys = (arr, oldKey) => { // function to rename on button click
+        arr = arr.map(function (arr) {
             delete arr[`${oldKey}`]; // Delete old key
             return arr;
         });
@@ -119,10 +119,10 @@ export default function App() {
         //     let arrs = Object.values(i)
         //     console.log(arrs)
         // }
-            // excelData.map( item => {
-            //     let arrs = Object.values(item)
-            //     //console.log(arrs.length)
-            // }) 
+        // excelData.map( item => {
+        //     let arrs = Object.values(item)
+        //     //console.log(arrs.length)
+        // }) 
     }
 
     const config = {
@@ -137,42 +137,49 @@ export default function App() {
         legend: {
             itemName: {
                 style: {
-                  fill: '#fff'
+                    fill: '#fff'
                 }
             }
         },
         xAxis: {
             label: {
-              style: {
-                  fill: '#fff'
+                style: {
+                    fill: '#fff'
                 },
             }
         },
         yAxis: {
-          label: {
-            style: {
-                fill: '#fff'
-              },
-            formatter: (v) => `${v}`.replace(/\d{1,3}(?=(\d{3})+$)/g, (s) => `${s},`),
-          },
+            grid: {
+                line: {
+                    style: {
+                        fill: 'red'
+                    }
+                }
+            },
+            label: {
+                style: {
+                    fill: '#fff'
+                },
+                formatter: (v) => `${v}`.replace(/\d{1,3}(?=(\d{3})+$)/g, (s) => `${s},`),
+            },
         },
         point: {
-          size: 0,
-          shape: 'diamond',
-          style: {
-            fill: 'white',
-            stroke: '#2593fc',
-            lineWidth: 2,
-          },
+            size: 0,
+            shape: 'diamond',
+            style: {
+                fill: 'white',
+                stroke: '#2593fc',
+                lineWidth: 2,
+            },
         },
         slider: {
             start: 0.1,
             end: 0.9,
             textStyle: {
-                opacity:0
+                opacity: 0
             },
             trendCfg: {
-              isArea: true,
+                isArea: true,
             },
             handlerStyle: {
                 radius: 10,
@@ -180,15 +187,15 @@ export default function App() {
                 fill: '#303950',
                 cursor: 'grabbing'
             },
-            trendCfg : {
+            trendCfg: {
                 backgroundStyle: {
-                  fill: '#3b4b65',
+                    fill: '#3b4b65',
                 },
                 lineStyle: {
-                  fill: 'transparent'
+                    fill: 'transparent'
                 }
-              }
-          },
+            }
+        },
         //   annotations: [
         //     {
         //       type: 'line',
@@ -203,7 +210,7 @@ export default function App() {
         // 
         //colors
         //color: ['#000000', '#ffffff', '#808080', '#c0c0c0', '#ff0000', '#008000'],
-      };
+    };
 
     return (
         <div className="container">
