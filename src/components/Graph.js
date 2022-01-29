@@ -167,7 +167,7 @@ export default function App() {
         //       },
         //     },
         //   ],
-        // legend: false,
+        // 
         //colors
         //color: ['#000000', '#ffffff', '#808080', '#c0c0c0', '#ff0000', '#008000'],
       };

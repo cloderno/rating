@@ -49,6 +49,16 @@
     left: -15px;
 }
 
+.g2-tooltip-title {
+    padding: 10px !important;
+    width: 30%;
+    color: #fff;
+    font-size: 16px;
+    border: 2px solid #000000;
+    border-radius: 5px;
+    background: #000000;
+}
+
 .g2-tooltip-list-item:nth-child(1) {
     background: #008000;
 }
